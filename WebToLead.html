@@ -1,117 +1,569 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<!-- Meta Tag to be Pasted in Head of your Page -->
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <head>
+        <base href="http://go.pardot.com" >
+        <meta charset="utf-8"/>
+        <meta name="description" content="%%description%%"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <title>%%title%%</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <style>
 
-<!-- CSS code for the form -->
-<style type="text/css">
+        /* --------------------------------------------------------------
+            FORM STYLES
+        ----------------------------------------------------------------- */
+
+            /* Border-box box model FTW! */
+            #pardot-form,
+            #pardot-form *,
+            #pardot-form *:before,
+            #pardot-form *:after {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            /* Override form margin and padding set in the default stylesheet. Inherit font and color from page. */
+            #pardot-form {
+                margin: 0;
+                padding: 0;
+                font: inherit;
+                color: inherit;
+            }
+
+            /* Override form field wrapper margin and padding set in the default stylesheet. */
+            #pardot-form .form-field,
+            #pardot-form .submit {
+                margin: 15px 0 15px 0;
+                padding: 0;
+            }
+
+            /* Remove top margin from first from field wrapper. */
+            #pardot-form .form-field:first-child {
+                margin-top: 0;
+            }
+
+            /* Set default input style. */
+            #pardot-form input {
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                box-sizing: border-box;
+                color: #2c3e50;
+                font-size: 14px;
+                padding: 7px 15px;
+                width: 100%;
+            }
+
+            /* When labels are not floated left, set width on text inputs, textareas, and selects to 100%. */
+            #pardot-form input.text,
+            #pardot-form input.date,
+            #pardot-form textarea,
+            #pardot-form select {
+                width: 100%;
+                font-family: inherit;
+                color: inherit;
+            }
+
+            /* When labels are floated left, set width on field labels to a percentage of available width. In browsers that support calc(), use static label width instead and the form field will consume the remaining width. */
+            #pardot-form.label-left .field-label {
+                width: 35%;
+                width: calc(115px);
+            }
+
+            /* When labels are floated left, set width on text inputs, textareas, and selects to a percentage. In supported browsers, set width to 100% minus the width of the label instead. */
+            #pardot-form.label-left input.text,
+            #pardot-form.label-left input.date,
+            #pardot-form.label-left textarea,
+            #pardot-form.label-left select {
+                width: 65%;
+                width: calc(100% - 115px);
+            }
+
+            /* When labels are floated left, indent supporting form elements by the same amount as the field label. */
+            #pardot-form.label-left span.value,
+            #pardot-form.label-left .description,
+            #pardot-form.label-left .no-label > *,
+            #pardot-form.label-left .submit,
+            #pardot-form.label-left .error.no-label {
+                margin-left: 35%;
+                margin-left: calc(115px);
+            }
+
+            /* Remove unnecessary left padding on required radio/checkbox field labels when label alignment is set to above and the required symbol is set to default in form styling options. */
+            #pardot-form label.inline {
+                padding-left: 0;
+            }
+
+            /* Backup styles in case padding is added to text inputs. */
+            #pardot-form input.date {
+                padding-left: 20px;
+                background-position: left center;
+            }
+
+            #pardot-form .submit input {
+                background-color: #337ab7;
+                color: #fff;
+            }
+
+        /* --------------------------------------------------------------
+            BASE
+        ----------------------------------------------------------------- */
+
+            /* Set the base font */
+            body {
+                color: #444;
+                font-family: inherit;
+                line-height: 27px;
+                font-size: 15px;
+            }
+
+            /* Set heading fonts */
+            h1 {  }
+            h2 {  }
+            h3 { font-size:20px; }
+            h4 {  }
+
+            /* Set default background colour */
+            .bgcolour {
+                background-color: #eee;
+            }
+            /* Set custom background colours for specific blocks, also update font colours if dark BG  */
+            .header.bgcolour { /* background-color: #eee; */ }
+            .footer.bgcolour { /* background-color: #eee; */ }
+            .block-one.bgcolour { background-color: #20232c; color: #fff; }
+            .block-two.bgcolour { background-color: #fafafa; }
+
+        /* --------------------------------------------------------------
+            TEMPLATE DETAILS
+        ----------------------------------------------------------------- */
+
+            /* Remove bottom space & adjust font */
+            .cta p {
+                margin-bottom: 0;
+                font-size: 21px;
+                font-weight: 200;
+            }
+
+            /* Remove bottom space */
+            footer p{
+                margin-bottom: 0;
+            }
+
+            /* Set dynamic width to images in block two */
+            .block-two .thumbnail img {
+                max-width: 100%;
+            }
+
+            /* Enable strong control over editable table cell widths */
+            table.editable-table {
+                table-layout: fixed;
+                width: 100%;
+            }
+
+            /* Set default editable table cell spacing & widths */
+            table.editable-table.3col td {
+                padding:0px 15px;
+                width:33%;
+            }
+            table.editable-table.2col td {
+                padding:0px 15px;
+                width:50%;
+            }
+
+            /* Grey BG */
+            .grey{
+                background-color:#eee;
+            }
+
+            /* Images do not extend containers */
+            img{
+                max-width: 100%;
+            }
+            table img{
+                width:100%;
+                max-width: 150px !important;
+            }
+
+        /* --------------------------------------------------------------
+            SPACING
+        ----------------------------------------------------------------- */
+
+            /* make element edge to edge */
+            .flush {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            /* vertical padding */
+            .vpadding {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            /* top padding only */
+            .tpadding {
+                padding-top: 20px;
+                padding-bottom: 0px;
+            }
+
+            /* side padding only */
+            .hpadding {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            /* bottom padding only */
+            .bpadding {
+                padding-top:0px;
+                padding-bottom:20px;
+            }
+
+            /* large vertical padding */
+            .vpaddingLG {
+                padding-top:50px;
+                padding-bottom:50px;
+            }
+
+            /* vertical padding double */
+            .vpadding-double{
+                padding-top:40px;
+                padding-bottom:40px;
+            }
+
+            /* vertical alignment */
+            .vcenter {
+                display: inline-block;
+                vertical-align: middle;
+                float: none;
+            }
+
+            /* spave below headings */
+            h1, h2, h3, h4, h5, h6 {
+                margin-bottom:15px;
+            }
+
+            /* space below paragraph */
+            p {
+                margin-bottom:20px;
+            }
+
+        /* --------------------------------------------------------------
+            SOCIAL
+        ----------------------------------------------------------------- */
+
+            /* Social container spacing */
+            .social {
+                line-height: 20px;
+            }
+
+                /* Make everything within social display next to one another */
+                .social * {
+                    display:inline;
+                    line-height: 20px;
+                }
+
+            /* Social list spacing */
+            .social-list {
+                padding-left:10px;
+                margin:0px;
+            }
+
+                /* Social list display next to one another */
+                .social-list li, .social-list{
+                    display:inline;
+                }
+
+                /* Disable underlines on image link hover */
+                .social-list a:hover{
+                    text-decoration: none;
+                }
+
+            /* Share button image specific style */
+            #share-buttons img {
+                width: 20px;
+                border: 0;
+                box-shadow: 0;
+                display: inline;
+            }
+
+
+        /* --------------------------------------------------------------
+            RESPONSIVE
+        ----------------------------------------------------------------- */
+            /* xs */
+            @media(max-width:767px){
+                .logo{
+                    text-align: center;
+                    padding-bottom:0;
+                }
+                .pull-right{
+                    float: none !important;
+                    text-align: center;
+                }
+                .vpadding-double{
+                    padding-top:0px;
+                    padding-bottom:0px;
+                }
+                .social{
+                    text-align: center;
+                }
+                .vcenter{
+                    width:100%;
+                    text-align: center;
+                }
+                .edit-image{
+                    width:290px;
+                    padding-bottom: 5px;
+                }
+            }
+            /* sm */
+            @media (max-width:768px){
+                #pardot-form.label-left .field-label {
+                    width: 100%;
+                    text-align: left;
+                }
+                #pardot-form.label-left input.text, #pardot-form.label-left input.date, #pardot-form.label-left textarea, #pardot-form.label-left select {
+                    width: 100%;
+                }
+                #pardot-form.label-left span.value,
+                #pardot-form.label-left .description,
+                #pardot-form.label-left .no-label > *,
+                #pardot-form.label-left .submit,
+                #pardot-form.label-left .error.no-label {
+                    width: 100%;
+                }
+                #pardot-form.label-left span.value, #pardot-form.label-left .description, #pardot-form.label-left .no-label > *, #pardot-form.label-left .submit, #pardot-form.label-left .error.no-label {
+                    margin-left: 0;
+                }
+                form.form p {
+                    margin-left: 0px !important;
+                    padding-left:0px !important;
+                }
+                table.editable-table td {
+                    display: block;
+                    width: 100% !important;
+                }
+            }
+            /* md */
+            @media(max-width:992px){
+
+            }
+            /* lg */
+            @media(min-width:1200px){
+
+            }
+        </style>
+    </head>
+    <body>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="header bgcolour">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-3 col-sm-6 logo vpadding vcenter">
+                <div class="editable">
+                   <img src="http://placehold.it/250x45?text=logo" width="250" alt="logo" placehold="logo" pardot-region="logo" pardot-region-type="image">
+                </div>
+              </div><!--
+              --><div class="col-md-9 col-sm-6 clearfix vpadding vcenter">
+                <div class="cta pull-right text-center">
+                  <div class="editable">
+                        <p pardot-region="secondary_cta">
+                            Speak with a Consultant <br>
+                            1-888-555-1234
+                        </p>
+                  </div><!-- editable -->
+                </div><!-- cta -->
+            </div><!-- col-md-9 -->
+          </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- header -->
+    <div class="block-one bgcolour">
+        
+      <div class="container vpadding-double">
+          <div class="vpadding-double">
+              <div class="editable">
+                    <h1 pardot-region="title">We're Here to Help</h1>
+                </div>
+                <div class="editable">
+                    <h2 class="tagline" pardot-region="tagline">Start Your Free Consultation Now</h2>
+                </div>
+          </div>
+      </div>
+    </div><!-- block-one -->
+  
+    <div class="block">
+        <div class="container">
+            <div class="row vpadding">
+                <div class="col-md-8">
+                    <div class="editable vpadding" pardot-region="main_content">
+                        <h3>New to LenoxSoft Solutions? Let's talk. </h3>
+                        <p>Whether you're looking to get up and running quickly with our platform, or you need to better understand how to optimize your existing platform, we're ready to roll up our sleeves and help. The LenoxSoft team has been providing services since 2000 for B2B companies across North America.</p>
+                        <p>We can talk you through some of the most common applications of our platform and share how customers in your industry have switched to LenoxSoft without looking back. We specialize in platforms supporting:</p>
+                        <ul>
+                            <li>Marketing</li>
+                            <li>Sales</li>
+                            <li>Supply Chain</li>
+                            <li>Management</li>
+                            <li>Human Resources</li>
+                        </ul>
+                        <p>LenoxSoft is a leading provider of business solutions. We inspire business leaders to be the world's future leaders of technology solutions business and society. We drive global business and social transformation through the fusion of business, technology and an entrepreneurial mindset.</p>
+                    </div>
+
+                    <div class="row" pardot-region="block_one_table"> 
+                            <table class="editable-table">
+                                <tr>
+                                    <td class="hpadding">
+                                        <h3>Customer Testimonials</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="vpadding">
+                                        <div class="col-sm-2 bpadding" style="text-align:center;">
+                                            <img src="/images/placeholder.php?width=130&amp;height=130" alt="placeholder image" />
+                                        </div>
+                                        <div class="col-sm-10">
+                                                <p>"Having access to Ignite Consultants is a service second-to-none. They work in conjunction with our team to identify solutions that meet our standards and amount to significant savings in our campaigns. We couldn't have asked for a better partner in this endeavor." - Janice Hume, Sales Ops, Flint Tropics</p>
+                                        </div>
+                                        <div class="row"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="vpadding">
+                                        <div class="col-sm-2 bpadding" style="text-align:center;">
+                                                <img src="/images/placeholder.php?width=130&amp;height=130" alt="placeholder image"  />
+                                        </div><!-- col-xs-2 -->
+                                        <div class="col-sm-10">
+                                                <p>"The reports available on the Ignite platform are better than I've seen over my 25+ years in the industry. I know they are keeping ahead of the curve in delivering this service. I would recommend this platform to all of my industry colleagues." - Roberto Pallante, VP, Aperture Labs</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table><!-- table -->
+                    </div><!-- container -->
+
+                </div><!-- div-md-8 -->
+                <div class="col-md-4 vpadding">
+                    <div class="editable">
+                        %%content%%
+                    </div>
+                </div>
+            </div><!-- row vpadding -->
+        </div><!-- container -->
+    </div><!-- block -->    
+ <hr>
+    <div class="block-two vpadding bgcolour" >
+        <div class="container" pardot-region="block_two_table"> 
+                <table class="editable-table 3col">
+                    <tr>
+                        <td class="hpadding">
+                            <h3>Onboarding</h3>
+                            <p>Talk to one of our experts today on strategies for successful onboarding and for getting the most out of your investment.</p>
+                        </td>
+                        <td class="hpadding">
+                            <h3>Customization</h3>
+                            <p>Not getting the most value out of your current platform? Our experts will share best practices based on your objective.</p>
+                        </td>
+                        <td class="hpadding">
+                            <h3>Execution</h3>
+                            <p>Speak to us today to determine if a LenoxSoft consultant may be a good fit to help you manage your platform on an ongoing basis.</p>
+                        </td>
+                    </tr>
+                </table><!-- table -->
+        </div><!-- container -->
+    </div><!-- block-one vpadding -->
+
+     <div class="grey clearfix">
+        <div class="container vpadding">
+            <div class="row">
+                <footer>  
+                    <div class="col-sm-6 clearfix">
+                        <div class="social">
+                          <div class="editable" pardot-region="social-text">
+                                <strong>Share This:</strong>
+                              <ul id="share-buttons" class="social-list">
+                                <!-- Facebook -->
+                                <li>
+                                    <a href="http://www.facebook.com/sharer.php?u=http://www.pardot.com" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                                    </a>
+                                </li>
+                                 <!-- Twitter -->
+                                <li>
+                                    <a href="https://twitter.com/share?url=http://www.pardot.com&amp;text=template-title" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                                    </a>
+                                </li>
+                                 <!-- LinkedIn -->
+                                <li>
+                                    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.pardot.com" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+                                    </a>
+                                </li>
+                                <!-- Google+ -->
+                                <li>
+                                    <a href="https://plus.google.com/share?url=http://www.pardot.com" target="_blank">
+                                        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                                    </a>
+                                </li>
+                                <!-- Email -->
+                                <li>
+                                    <a href="mailto:?Subject=template-title&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://www.pardot.com">
+                                        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+                                    </a>
+                                </li>
+                            </ul>
+                          </div><!-- editable -->
+                        </div><!-- social -->
+                    </div><!-- col-md-9 -->
+                    <div class="col-sm-6 clearfix">
+                        <div class="editable pull-right">
+                            <p pardot-region="footer-text"><a href='#'>Privacy Policy</a> | <a href="#">Company Name</a></p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div><!-- grey -->
+
 	
-.form-style-5{
-max-width: 500px;
-padding: 10px 20px;
-background: #f4f7f8;
-margin: 10px auto;
-padding: 20px;
-background: #f4f7f8;
-border-radius: 8px;
-font-family: Georgia, "Times New Roman", Times, serif;
-}
-.form-style-5 fieldset{
-border: none;
-}
-.form-style-5 legend {
-font-size: 1.4em;
-margin-bottom: 10px;
-}
-.form-style-5 label {
-display: block;
-margin-bottom: 8px;
-}
-.form-style-5 input[type="text"],
-.form-style-5 textarea,
-.form-style-5 select {
-font-family: Georgia, "Times New Roman", Times, serif;
-background: rgba(255,255,255,.1);
-border: none;
-border-radius: 4px;
-font-size: 15px;
-margin: 0;
-outline: 0;
-padding: 10px;
-width: 100%;
-box-sizing: border-box; 
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box; 
-background-color: #e8eeef;
-color:#8a97a0;
--webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-margin-bottom: 30px;
-}
-.form-style-5 input[type="text"]:focus,
-.form-style-5 textarea:focus,
-.form-style-5 select:focus{
-background: #d2d9dd;
-}
-.form-style-5 select{
--webkit-appearance: menulist-button;
-height:35px;
-}
-.form-style-5 .number {
-background: #1abc9c;
-color: #fff;
-height: 30px;
-width: 30px;
-display: inline-block;
-font-size: 0.8em;
-margin-right: 4px;
-line-height: 30px;
-text-align: center;
-text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-border-radius: 15px 15px 15px 0px;
-}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script>
 
-.form-style-5 input[type="submit"]
-{
-position: relative;
-display: block;
-padding: 19px 39px 18px 39px;
-color: #FFF;
-margin: 0 auto;
-background: #1abc9c;
-font-size: 18px;
-text-align: center;
-font-style: normal;
-width: 100%;
-border: 1px solid #16a085;
-border-width: 1px 1px 3px;
-margin-bottom: 10px;
-}
-.form-style-5 input[type="submit"]:hover,
-{
-background: #109177;
-}
-</style>
-</head>
-<body>
-<div class="form-style-5">
-<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-<fieldset>
-<legend><span class="number">1</span> Contact Us</legend>
-<!-- Here the hidden Input -->
-<input type=hidden name="oid" value="00D3N0000008qzE">
-<input type=hidden name="retURL" value="https://www.kilroy.net/">
-<!-- Input Type -->
-<label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
-<label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
-<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
-<label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
-<label for="company">Company</label><input  id="company" maxlength="40" name="company" size="20" type="text" /><br>
-<label for="city">City</label><input  id="city" maxlength="40" name="city" size="20" type="text" /><br>
-<label for="state">State/Province</label><input  id="state" maxlength="20" name="state" size="20" type="text" /><br>
-<input type="submit" name="submit">
-</fieldset>
-</form>
-</div>
-</body>
+    /* --------------------------------------------------------------
+        FUNCTIONS
+    ----------------------------------------------------------------- */
+        /**
+         * Replace all occurences of https://simplesharebuttons.com in the
+         * social sharing list with the url of this page, and all occurrence
+         * of "Check this out" with the page title
+         */
+            $(".social-list a").each(function() {
+                // get values
+                var thisPage = window.location.href;
+                var url = $(this).attr('href');
+
+                // get title of this page
+                var title = $(document).find("title").text();
+              
+                // replace values
+                url = url.replace("http://www.pardot.com", thisPage);
+                url = url.replace("template-title", title);
+
+                //update value of the link anchor
+                $(this).attr('href', url);
+            });
+
+        /**
+         * Pardot label alignment fix
+         */
+            pardot.$(function() {
+                var $ = window.pardot.$;
+                // Add label-left class to the <form> if label alignment is set to Default or Left in form styling
+                var $labelAlignment = $('#pardot-form .field-label').css('float');
+                if ($labelAlignment == 'left') { $('#pardot-form').addClass('label-left'); }
+            });
+
+    </script>
+ </body>
 </html>
